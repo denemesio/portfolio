@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Nemesio | denemesi.com</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --bg-dark: #050505;
+        }
+        body {
+            background: var(--bg-dark);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        /* Estética CSS-Tricks / Cyber-Neon */
+        .grid-bg {
+            position: fixed;
+            top: 0; width: 100vw; height: 100vh;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+        .section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        /* Animación impulsada por desplazamiento */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal { opacity: 1; transform: translateY(0); }
+
+        .terminal-text { color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <section class="section">
+        <h1 class="terminal-text">> EDU_NEMESIO_INIT...</h1>
+        <p>ARQUITECTO DE REALIDADES DIGITALES</p>
+        <div id="speed-meter">PPM: 0</div>
+    </section>
+
+    <section class="section fade-in" id="legacy">
+        <h2 class="terminal-text">EL LEGADO: 486 & CMD</h2>
+        <p>De los comandos sin internet a la maestría del Hardware.</p>
+    </section>
+
+    <section class="section fade-in" id="security">
+        <h2 class="terminal-text">CIBERSEGURIDAD & HACKING</h2>
+        <p>Certificado IFCT103 (2025) y Hacking Ético desde 2018.</p>
+    </section>
+
+    <script>
+        // Lógica de Scrollytelling
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('reveal');
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // HUEVO DE PASCUA: Detector de 535 PPM
+        let keys = [];
+        window.addEventListener('keydown', (e) => {
+            keys.push(Date.now());
+            if(keys.length > 10) {
+                let diff = keys[keys.length-1] - keys[keys.length-10];
+                let ppm = Math.round((10 / diff) * 60000);
+                document.getElementById('speed-meter').innerText = `PPM: ${ppm}`;
+                if(ppm >= 500) {
+                    document.body.style.boxShadow = "inset 0 0 100px #bc13fe";
+                    console.log("ACCESO MAESTRO CONCEDIDO: MODO NEMESIO ACTIVO");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
